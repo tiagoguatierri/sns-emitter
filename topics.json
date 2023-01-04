@@ -1,0 +1,26 @@
+[
+  {
+    "topicName": "sns-topic-name-one",
+    "request": {
+      "message": "SNS Topic One"
+    }
+  },
+  {
+    "topicName": "sns-topic-name-two",
+    "request": {
+      "message": "SNS Topic Two"
+    }
+  },
+  {
+    "topicName": "sns-topic-name-three",
+    "request": {
+      "message": "SNS Topic Three"
+    }
+  },
+  {
+    "topicName": "sns-topic-name-four",
+    "request": {
+      "message": "SNS Topic Four"
+    }
+  }
+]
