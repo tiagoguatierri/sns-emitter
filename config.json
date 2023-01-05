@@ -1,8 +1,6 @@
 {
   "host": "http://127.0.0.1",
-  "port": 4012,
-  "aws": {
-    "accountId": "",
-    "region": "us-east-1"
-  }
+  "port": 4003,
+  "aws_account_id": "123456789",
+  "aws_region": "us-east-1"
 }

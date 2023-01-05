@@ -17,18 +17,22 @@
     "type": "git",
     "url": "https://github.com/tiagoguatierri/sns-emitter.git"
   },
+  "issue": "https://github.com/tiagoguatierri/sns-emitter/issues",
   "publishConfig": {
     "access": "public"
   },
-  "main": "index.mjs",
+  "main": "./lib/index.js",
+  "bin": {
+    "sns-emitter": "./bin/index.js"
+  },
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node index",
     "postversion": "git commit -m \"Bump package version to $npm_package_version\" package.json; git flow release start $npm_package_version; git flow release finish -m $npm_package_version $npm_package_version; git checkout develop; git merge main"
   },
   "dependencies": {
     "aws-sdk": "2.1286.0",
     "chalk": "5.2.0",
+    "esbuild": "0.16.14",
     "figlet": "1.5.2",
     "inquirer": "9.1.4"
   }
