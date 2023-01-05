@@ -22,6 +22,10 @@ You will see something like:
 
 All done!  Now just choose to browse the options and voilà.
 
+## Roadmap
+- Writing unit tests
+- Package library (esbuild)
+
 ## Contribute
 Help us to make this CLI better.
 
