@@ -1,6 +1,6 @@
 {
   "name": "sns-emitter",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Small library to emit SNS offline event",
   "keywords": [
     "sns",
