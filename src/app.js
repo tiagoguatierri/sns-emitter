@@ -3,14 +3,13 @@
 import chalk from 'chalk'
 import figlet from 'figlet'
 import inquirer from 'inquirer'
-import pkg from '../../package.json' assert { type: 'json' }
 
 import { Setup } from './core/setup.js'
 import { TopicUtils } from './core/topic-utils.js'
 
 export class SNSEmitter {
-  constructor() {
-    this.version = pkg.version
+  constructor(version) {
+    this.version = version
   }
 
   async #listOptions() {

@@ -1,4 +1,4 @@
-![enter image description here](https://raw.githubusercontent.com/tiagoguatierri/sns-emitter/main/lib/assets/header.png)
+![enter image description here](https://raw.githubusercontent.com/tiagoguatierri/sns-emitter/main/image.png)
 ## SNS Emitter
 CLI developed in Nodejs to emit SNS offline events.
 
@@ -18,7 +18,7 @@ Running the CLI
     npx sns-emitter
 
 You will see something like:
-![enter image description here](https://raw.githubusercontent.com/tiagoguatierri/sns-emitter/main/lib/assets/header.png)
+![enter image description here](https://raw.githubusercontent.com/tiagoguatierri/sns-emitter/main/image.png)
 
 All done!  Now just choose to browse the options and voilà.
 

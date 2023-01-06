@@ -4,11 +4,10 @@ import chalk from 'chalk'
 
 import { access, readFile, writeFile, constants } from 'fs/promises'
 import { resolve } from 'path'
-import { cwd } from 'process'
 
 import { SNSTopic } from './sns-topic.js'
 
-const TOPICS_DIR = resolve(cwd(), 'topics.json')
+const TOPICS_DIR = resolve(process.cwd(), 'topics.json')
 
 export class TopicUtils {
   static topics = []

@@ -10,22 +10,25 @@
   ],
   "author": "Tiago Guatierri <tiagovit@gmail.com",
   "license": "MIT",
+  "type": "module",
+  "main": "dist/bundle.js",
   "engines": {
     "node": ">=14.x"
+  },
+  "bin": {
+    "sns-emitter": "./bin/run.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/tiagoguatierri/sns-emitter.git"
   },
   "issue": "https://github.com/tiagoguatierri/sns-emitter/issues",
-  "publishConfig": {
-    "access": "public"
+  "scripts": {
+    "preversion": "npx rimraf dist && node scripts/build"
   },
-  "main": "./lib/index.js",
-  "bin": {
-    "sns-emitter": "./bin/index.js"
-  },
-  "type": "module",
   "dependencies": {
     "aws-sdk": "2.1286.0",
     "chalk": "5.2.0",
@@ -33,7 +36,9 @@
     "inquirer": "9.1.4"
   },
   "devDependencies": {
-    "esbuild": "^0.16.14",
-    "jest": "^29.3.1"
+    "esbuild-node-externals": "^1.6.0",
+    "glob": "^8.0.3",
+    "jest": "^29.3.1",
+    "rimraf": "^3.0.2"
   }
 }

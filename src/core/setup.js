@@ -2,9 +2,8 @@
 
 import { access, readFile, writeFile, constants } from 'fs/promises'
 import { resolve } from 'path'
-import { cwd } from 'process'
 
-const CONFIG_DIR = resolve(cwd(), 'config.json')
+const CONFIG_DIR = resolve(process.cwd(), 'config.json')
 
 export class Setup {
   static config
