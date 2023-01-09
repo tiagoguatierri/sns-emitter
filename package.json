@@ -16,7 +16,7 @@
     "node": ">=14.x"
   },
   "bin": {
-    "sns-emitter": "./bin/run.js"
+    "sns-emitter": "./bin/index.js"
   },
   "publishConfig": {
     "access": "public"
@@ -27,7 +27,7 @@
   },
   "issue": "https://github.com/tiagoguatierri/sns-emitter/issues",
   "scripts": {
-    "preversion": "npx rimraf dist && node scripts/build"
+    "preversion": "npx rimraf dist && node esbuild"
   },
   "dependencies": {
     "aws-sdk": "2.1286.0",

@@ -3,24 +3,28 @@ import glob from 'glob'
 import rimraf from 'rimraf'
 
 import { nodeExternalsPlugin } from 'esbuild-node-externals'
-import { join } from 'path'
+import { dirname, join } from 'path'
 import { promisify } from 'util'
+import { fileURLToPath } from 'url'
 
-const ENTRY_FOLDER = join(process.cwd(), 'src')
-const OUT_FOLDER = join(process.cwd(), 'dist')
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const entry = join(__dirname, 'src')
+const dist = join(__dirname, 'dist')
 
 const dropFolder = promisify(rimraf)
 const listMatch = promisify(glob)
 
-const entryPoints = await listMatch(`${ENTRY_FOLDER}/**/*.js`)
-await dropFolder(OUT_FOLDER)
+const entryPoints = await listMatch(`${entry}/**/*.js`)
+await dropFolder(dist)
 
 // esm output bundles with code splitting
 await esbuild
   .build({
     stdin: { contents: '' },
     inject: entryPoints,
-    outfile: `${OUT_FOLDER}/bundle.js`,
+    outfile: `${dist}/bundle.js`,
     platform: 'node',
     bundle: true,
     minify: true,
