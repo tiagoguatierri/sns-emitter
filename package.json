@@ -3,9 +3,12 @@
   "version": "0.2.1",
   "description": "Small library to emit SNS offline event",
   "keywords": [
-    "sns",
     "aws",
+    "aws-sdk",
+    "lambda",
+    "nodejs",
     "serverless",
+    "sns",
     "sns-offline-sns"
   ],
   "author": "Tiago Guatierri <tiagovit@gmail.com",
