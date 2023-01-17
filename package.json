@@ -31,9 +31,9 @@
   "issue": "https://github.com/tiagoguatierri/sns-emitter/issues",
   "scripts": {
     "build": "npx rimraf dist && node esbuild",
-    "push": "npm run build && npm version patch && git push",
-    "push-minor": "npm run build && npm version minor && git push",
-    "push-major": "npm run build && npm version major && git push"
+    "push": "npm version patch && git push",
+    "push-minor": "npm version minor && git push",
+    "push-major": "npm version major && git push"
   },
   "files": [
     "bin/**/*.js",
