@@ -11,6 +11,7 @@ export class SNSTopic {
   #sns
 
   constructor(topicName) {
+    console.log(config.port)
     this.#topicArn = `arn:aws:sns:${config.aws_region}:${config.aws_account_id}:${topicName}`
     this.#sns = new AWS.SNS({
       endpoint: `${config.host}:${config.port}`

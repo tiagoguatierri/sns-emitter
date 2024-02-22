@@ -24,6 +24,33 @@ export class TopicUtils {
     }
   }
 
+  static async getTopic(topicName) {
+    try {
+      const json = await readFile(TOPICS_DIR, 'utf8')
+      const topics = JSON.parse(json)
+      return topics.find(({ name }) => name === topicName)
+    } catch (error) {
+      console.error('TopicUtils#getTopic', {
+        eventName: 'TopicUtilsGetError',
+        error
+      })
+    }
+  }
+
+  static async updateTopic(topic) {
+    try {
+      const topics = await this.listTopics()
+      const index = topics.findIndex(({ name }) => name === topic.name)
+      topics[index] = topic
+      await this.setTopic(topics)
+    } catch (error) {
+      console.error('TopicUtils#updateTopic', {
+        eventName: 'TopicUtilsUpdateTopicError',
+        error
+      })
+    }
+  }
+
   static async setTopic(topics) {
     try {
       const json = JSON.stringify(topics, null, 2)

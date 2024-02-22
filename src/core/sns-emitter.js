@@ -33,16 +33,20 @@ export class SNSEmitter {
             name: '3. Create a new topic'
           },
           {
+            value: 'edit_topic',
+            name: '4. Edit a topic'
+          },
+          {
             value: 'dispatch_topics',
-            name: '4. Dispatch an topic(s)'
+            name: '5. Dispatch an topic(s)'
           },
           {
             value: 'delete_topics',
-            name: '5. Delete an topic(s)'
+            name: '6. Delete an topic(s)'
           },
           {
             value: 'exit',
-            name: '6. Exit'
+            name: '7. Exit'
           }
         ]
       }
@@ -61,6 +65,9 @@ export class SNSEmitter {
         break
       case 'create_topic':
         await this.#createTopic()
+        break
+      case 'edit_topic':
+        await this.#editTopic()
         break
       case 'dispatch_topics':
         await this.#dispatchTopics()
@@ -146,9 +153,44 @@ export class SNSEmitter {
     await this.#listOptions()
   }
 
-  async #dispatchTopics() {
-    const topics = await TopicUtils.listTopics()
+  async #editTopic() {
+    const topics = await this.#getTopics()
+    if (!topics.length) return topics
 
+    const selected = await this.#createPromptTopicList(
+      'Select witch topic wish to edit:',
+      topics,
+      'list'
+    )
+
+    const topic = await TopicUtils.getTopic(selected.topics)
+    const prompt = inquirer.createPromptModule()
+    const { request } = await prompt([
+      {
+        message: 'Editor',
+        type: 'editor',
+        name: 'request',
+        default: topic.request,
+        validate: function (input) {
+          const done = this.async()
+          try {
+            JSON.stringify(input)
+            done(null, true)
+          } catch (error) {
+            done('You need provide a valid JSON.')
+            return
+          }
+        }
+      }
+    ])
+
+    await TopicUtils.updateTopic({ ...topic, request })
+    console.log(chalk.greenBright('\nTopic has been updated successfully!'))
+    return this.#listOptions()
+  }
+
+  async #getTopics() {
+    const topics = await TopicUtils.listTopics()
     if (!topics.length) {
       console.log(
         chalk.yellowBright(
@@ -157,16 +199,26 @@ export class SNSEmitter {
       )
       return this.#listOptions()
     }
+    return topics
+  }
+
+  async #dispatchTopics() {
+    const topics = await this.#getTopics()
+    if (!topics.length) return topics
 
     const selected = await this.#createPromptTopicList(
       'Select witch topics wish to dispatch:',
       topics
     )
 
+    if (!selected.topics.length) {
+      return this.#listOptions()
+    }
+
     TopicUtils.prepare(topics, selected.topics)
 
     await TopicUtils.emit()
-    await this.#listOptions()
+    return this.#dispatchTopics()
   }
 
   async #deleteTopics() {
@@ -190,13 +242,13 @@ export class SNSEmitter {
     await this.#listOptions()
   }
 
-  async #createPromptTopicList(message, topics) {
+  async #createPromptTopicList(message, topics, type = 'checkbox') {
     const prompt = inquirer.createPromptModule()
     return prompt([
       {
         message,
         name: 'topics',
-        type: 'checkbox',
+        type,
         choices: topics.map(({ name }) => ({
           name: name,
           value: name

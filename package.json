@@ -33,7 +33,8 @@
     "build": "npx rimraf dist && node esbuild",
     "push": "npm version patch && git push",
     "push-minor": "npm version minor && git push",
-    "push-major": "npm version major && git push"
+    "push-major": "npm version major && git push",
+    "dev": "node --watch src/app.js"
   },
   "files": [
     "bin/**/*.js",
