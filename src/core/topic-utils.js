@@ -17,10 +17,11 @@ export class TopicUtils {
       const json = await readFile(TOPICS_DIR, 'utf8')
       return JSON.parse(json)
     } catch (error) {
-      console.error('TopicUtils#listTopics', {
-        eventName: 'TopicUtilsListTopicsError',
-        error
-      })
+      // console.error('TopicUtils#listTopics', {
+      //   eventName: 'TopicUtilsListTopicsError',
+      //   error
+      // })
+      return []
     }
   }
 
@@ -30,10 +31,10 @@ export class TopicUtils {
       const topics = JSON.parse(json)
       return topics.find(({ name }) => name === topicName)
     } catch (error) {
-      console.error('TopicUtils#getTopic', {
-        eventName: 'TopicUtilsGetError',
-        error
-      })
+      // console.error('TopicUtils#getTopic', {
+      //   eventName: 'TopicUtilsGetError',
+      //   error
+      // })
     }
   }
 

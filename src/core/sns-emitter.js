@@ -75,8 +75,10 @@ export class SNSEmitter {
       case 'delete_topics':
         await this.#deleteTopics()
         break
-      default:
+      default: {
         console.log(chalk.redBright('Thanks for use SNS Emitter! Bye.'))
+        process.exit(0)
+      }
     }
   }
 
@@ -122,6 +124,7 @@ export class SNSEmitter {
     const topic = await prompt([
       {
         message: 'Topic name:',
+        type: 'input',
         name: 'name',
         validate: function (input) {
           const done = this.async()
@@ -133,9 +136,10 @@ export class SNSEmitter {
         }
       },
       {
-        message: 'Topic request (JSON string format):',
+        message: 'Topic request:',
         name: 'request',
-        default: '{"message":"SNS Emitter is awesome!"}',
+        type: 'editor',
+        default: '',
         validate: function (input) {
           const done = this.async()
           try {
@@ -199,7 +203,7 @@ export class SNSEmitter {
       )
       return this.#listOptions()
     }
-    return topics
+    return topics ?? []
   }
 
   async #dispatchTopics() {
